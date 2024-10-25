@@ -3,7 +3,7 @@ version: '3.8'
 services:
   docker-mysql:
     image: mysql:8.0
-    restart: on-failure
+    restart: always
     container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: selenium-performance
@@ -11,7 +11,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./src/test/resources/:/var/lib/mysql
+      - ./db/:/var/lib/mysql
 
   app:
     build:
