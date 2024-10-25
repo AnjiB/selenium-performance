@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  docker-mysql:
+    image: mysql:8.0
+    restart: on-failure
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: selenium-performance
+      MYSQL_DATABASE: selenium
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./src/test/resources/:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - docker-mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/selenium
+
+volumes:
+  mysql_data:
