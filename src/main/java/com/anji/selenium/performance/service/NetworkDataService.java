@@ -2,6 +2,7 @@ package com.anji.selenium.performance.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anji.selenium.performance.dao.NetworkDataRepository;
@@ -12,16 +13,11 @@ import com.anji.selenium.performance.mapper.NetworkDataMapper;
 @Service
 public class NetworkDataService {
 
-	private final NetworkDataRepository repository;
-	private final NetworkDataMapper mapper;
-
-	public NetworkDataService(NetworkDataRepository repository, NetworkDataMapper mapper) {
-		this.repository = repository;
-		this.mapper = mapper;
-	}
-
+	@Autowired
+	private NetworkDataRepository networkDataRepository;
+	
 	public void saveNetworkData(List<NetworkDataDto> dto) {
-		List<NetworkData> entity = mapper.toEntityList(dto);
-		repository.saveAll(entity);
+		List<NetworkData> networkDataEntityList = NetworkDataMapper.INSTANCE.toEntityList(dto);
+		networkDataRepository.saveAll(networkDataEntityList);
 	}
 }

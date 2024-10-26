@@ -15,9 +15,8 @@ public interface NetworkDataMapper {
     NetworkDataMapper INSTANCE = Mappers.getMapper(NetworkDataMapper.class);
 
     NetworkData toEntity(NetworkDataDto dto);
-    NetworkDataDto toDto(NetworkData entity);
     
     List<NetworkData> toEntityList(List<NetworkDataDto> dtoList);
-    List<NetworkDataDto> toDtoList(List<NetworkData> entityList);
+    
 }
 
