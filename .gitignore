@@ -31,3 +31,6 @@ replay_pid*
 .classpath
 .project
 
+db/
+grafana-data/
+
